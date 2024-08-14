@@ -15,7 +15,6 @@ double calculatePerpendicularDistance(const Point& A, const Point& B, const Poin
     // Calculate vector AC
     Point AC = {C.x - A.x, C.y - A.y, C.z - A.z};
     
-    // Cross product of AB and AC
     Point crossProduct = {
         AB.y * AC.z - AB.z * AC.y,
         AB.z * AC.x - AB.x * AC.z,
@@ -36,7 +35,6 @@ double calculatePerpendicularDistance(const Point& A, const Point& B, const Poin
         AB.z * AB.z
     );
     
-    // Perpendicular distance
     return crossProductMagnitude / AB_magnitude;
 }
 
@@ -50,8 +48,8 @@ void processCSV(const std::string& inputFilename, const std::string& outputFilen
     }
     
     std::string line;
-    std::getline(inputFile, line);  // Read header
-    outputFile << line << ",perpendicular_distance" << std::endl;  // Write header with new column
+    std::getline(inputFile, line);
+    outputFile << line << ",perpendicular_distance" << std::endl;  
 
     while (std::getline(inputFile, line)) {
         std::istringstream ss(line);
@@ -69,7 +67,7 @@ void processCSV(const std::string& inputFilename, const std::string& outputFilen
             
             double distance = calculatePerpendicularDistance(A, B, C);
             
-            // Write the original line with the new distance value
+            
             outputFile << line << "," << distance << std::endl;
         }
     }
