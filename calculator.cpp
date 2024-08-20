@@ -39,6 +39,5 @@ int main()
     default:
         cout << "Wrong operator chosen";
     }
-
     return 0;
 }
