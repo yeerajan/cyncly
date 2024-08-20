@@ -7,6 +7,7 @@ const double PI = 3.141592653589793;
 struct Vertex {
     double x, y, z;
 };
+
 Vertex findNormal(const Vertex& v1, const Vertex& v2, const Vertex& v3){
     // Calculate normal
     double normalX = (v2.y - v1.y) * (v3.z - v1.z) - (v2.z - v1.z) * (v3.y - v1.y);
@@ -22,6 +23,7 @@ Vertex findNormal(const Vertex& v1, const Vertex& v2, const Vertex& v3){
     Vertex normal = {normalX, normalY, normalZ};
     return normal;
 }
+
 void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, const Vertex& v3) {
     
     Vertex normal = findNormal(v1, v2, v3);
