@@ -3,12 +3,16 @@
 #include <cmath>
 
 const double PI = 3.141592653589793;
+const double height = 5.00;
+const double radius = 1.00;
 
-struct Vertex {
+struct Vertex
+{
     double x, y, z;
 };
 
-Vertex findNormal(const Vertex& v1, const Vertex& v2, const Vertex& v3){
+Vertex findNormal(const Vertex &v1, const Vertex &v2, const Vertex &v3)
+{
     // Calculate normal
     double normalX = (v2.y - v1.y) * (v3.z - v1.z) - (v2.z - v1.z) * (v3.y - v1.y);
     double normalY = (v2.z - v1.z) * (v3.x - v1.x) - (v2.x - v1.x) * (v3.z - v1.z);
@@ -24,8 +28,9 @@ Vertex findNormal(const Vertex& v1, const Vertex& v2, const Vertex& v3){
     return normal;
 }
 
-void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, const Vertex& v3) {
-    
+void writeFacet(std::ofstream &stlFile, const Vertex &v1, const Vertex &v2, const Vertex &v3)
+{
+
     Vertex normal = findNormal(v1, v2, v3);
 
     // Write the facet to the STL file
@@ -38,59 +43,61 @@ void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, cons
     stlFile << "  endfacet\n";
 }
 
-int main() {
+int main()
+{
     // Parameters for the sphere
     double radius = 1.0;
-    int N = 200; // Number of latitude segments
-    int M = 200; // Number of longitude segments
+    int N = 25; // Number of latitude segments
+    int M = 25; // Number of longitude segments
 
     // Open the STL file
-    std::ofstream stlFile("sphere.stl");
+    std::ofstream stlFile("cylinder.stl");
 
-    if (!stlFile) {
+    if (!stlFile)
+    {
         std::cerr << "Unable to open file";
         return 1;
     }
 
-    stlFile << "solid sphere\n";
+    stlFile << "solid cylinder\n";
 
-    for (int i = 0; i < N; ++i) {
-        double phi1 = PI * i / N;
-        double phi2 = PI * (i + 1) / N;
+    for (int i = 0; i < N; ++i)
+    {
+        double theta1 = 2 * PI * i / N;
+        double theta2 = 2 * PI * (i + 1) / N;
 
-        for (int j = 0; j < M; ++j) {
-            double theta1 = 2 * PI * j / M;
-            double theta2 = 2 * PI * (j + 1) / M;
+        for (int j = 0; j < M; ++j)
+        {
+            double height1 = height * j / M;
+            double height2 = height * (j + 1) / M;
 
             // Calculate the vertices of the first triangle
-            Vertex v1 = { radius * std::sin(phi1) * std::cos(theta1),
-                          radius * std::sin(phi1) * std::sin(theta1),
-                          radius * std::cos(phi1) };
+            Vertex v1 = {radius * std::cos(theta1),
+                         radius * std::sin(theta1),
+                         height1};
 
-            Vertex v2 = { radius * std::sin(phi2) * std::cos(theta1),
-                          radius * std::sin(phi2) * std::sin(theta1),
-                          radius * std::cos(phi2) };
+            Vertex v2 = {radius * std::cos(theta2),
+                         radius * std::sin(theta2),
+                         height1};
 
-            Vertex v3 = { radius * std::sin(phi2) * std::cos(theta2),
-                          radius * std::sin(phi2) * std::sin(theta2),
-                          radius * std::cos(phi2) };
-
+            Vertex v3 = {radius * std::cos(theta2),
+                         radius * std::sin(theta2),
+                         height2};
             // Calculate the vertices of the second triangle
-            Vertex v4 = { radius * std::sin(phi1) * std::cos(theta2),
-                          radius * std::sin(phi1) * std::sin(theta2),
-                          radius * std::cos(phi1) };
+            Vertex v4 = {radius * std::cos(theta1),
+                         radius * std::sin(theta1),
+                         height2};
 
             // Write the two triangles
             writeFacet(stlFile, v1, v2, v3);
             writeFacet(stlFile, v1, v3, v4);
         }
     }
-
     stlFile << "endsolid sphere\n";
 
     stlFile.close();
 
-    std::cout << "sphere.stl file has been generated." << std::endl;
+    std::cout << "cylinder.stl file has been generated." << std::endl;
 
     return 0;
 }
