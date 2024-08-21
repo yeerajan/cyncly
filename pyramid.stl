@@ -1,0 +1,170 @@
+solid pyramid
+  facet normal 0.654654 0.654654 0.377964
+    outer loop
+      vertex 0 0 1
+      vertex 0.866025 0 -0.5
+      vertex 5.30288e-17 0.866025 -0.5
+    endloop
+  endfacet
+  facet normal nan nan nan
+    outer loop
+      vertex 0 0 1
+      vertex 5.30288e-17 0.866025 -0.5
+      vertex 0 0 1
+    endloop
+  endfacet
+  facet normal -0.654654 0.654654 0.377964
+    outer loop
+      vertex 0 0 1
+      vertex 5.30288e-17 0.866025 -0.5
+      vertex -0.866025 1.06058e-16 -0.5
+    endloop
+  endfacet
+  facet normal nan nan nan
+    outer loop
+      vertex 0 0 1
+      vertex -0.866025 1.06058e-16 -0.5
+      vertex -0 0 1
+    endloop
+  endfacet
+  facet normal -0.654654 -0.654654 0.377964
+    outer loop
+      vertex -0 0 1
+      vertex -0.866025 1.06058e-16 -0.5
+      vertex -1.59086e-16 -0.866025 -0.5
+    endloop
+  endfacet
+  facet normal nan nan nan
+    outer loop
+      vertex -0 0 1
+      vertex -1.59086e-16 -0.866025 -0.5
+      vertex -0 -0 1
+    endloop
+  endfacet
+  facet normal 0.654654 -0.654654 0.377964
+    outer loop
+      vertex -0 -0 1
+      vertex -1.59086e-16 -0.866025 -0.5
+      vertex 0.866025 -2.12115e-16 -0.5
+    endloop
+  endfacet
+  facet normal nan nan nan
+    outer loop
+      vertex -0 -0 1
+      vertex 0.866025 -2.12115e-16 -0.5
+      vertex 0 -0 1
+    endloop
+  endfacet
+  facet normal -3.84593e-16 -3.84593e-16 1
+    outer loop
+      vertex 0.866025 0 -0.5
+      vertex -0.866025 -0 -0.5
+      vertex -5.30288e-17 -0.866025 -0.5
+    endloop
+  endfacet
+  facet normal 3.84593e-16 3.84593e-16 -1
+    outer loop
+      vertex 0.866025 0 -0.5
+      vertex -5.30288e-17 -0.866025 -0.5
+      vertex 5.30288e-17 0.866025 -0.5
+    endloop
+  endfacet
+  facet normal 3.84593e-16 -3.84593e-16 1
+    outer loop
+      vertex 5.30288e-17 0.866025 -0.5
+      vertex -5.30288e-17 -0.866025 -0.5
+      vertex 0.866025 -1.06058e-16 -0.5
+    endloop
+  endfacet
+  facet normal -3.84593e-16 3.84593e-16 -1
+    outer loop
+      vertex 5.30288e-17 0.866025 -0.5
+      vertex 0.866025 -1.06058e-16 -0.5
+      vertex -0.866025 1.06058e-16 -0.5
+    endloop
+  endfacet
+  facet normal 3.84593e-16 3.84593e-16 1
+    outer loop
+      vertex -0.866025 1.06058e-16 -0.5
+      vertex 0.866025 -1.06058e-16 -0.5
+      vertex 1.59086e-16 0.866025 -0.5
+    endloop
+  endfacet
+  facet normal -3.84593e-16 -3.84593e-16 -1
+    outer loop
+      vertex -0.866025 1.06058e-16 -0.5
+      vertex 1.59086e-16 0.866025 -0.5
+      vertex -1.59086e-16 -0.866025 -0.5
+    endloop
+  endfacet
+  facet normal -3.84593e-16 3.84593e-16 1
+    outer loop
+      vertex -1.59086e-16 -0.866025 -0.5
+      vertex 1.59086e-16 0.866025 -0.5
+      vertex -0.866025 2.12115e-16 -0.5
+    endloop
+  endfacet
+  facet normal 3.84593e-16 -3.84593e-16 -1
+    outer loop
+      vertex -1.59086e-16 -0.866025 -0.5
+      vertex -0.866025 2.12115e-16 -0.5
+      vertex 0.866025 -2.12115e-16 -0.5
+    endloop
+  endfacet
+  facet normal 0.76728 0.463726 -0.442989
+    outer loop
+      vertex -0.866025 -0 -0.5
+      vertex -2.44929e-16 -0 1
+      vertex -1.49976e-32 -2.44929e-16 1
+    endloop
+  endfacet
+  facet normal 0.654654 0.654654 -0.377964
+    outer loop
+      vertex -0.866025 -0 -0.5
+      vertex -1.49976e-32 -2.44929e-16 1
+      vertex -5.30288e-17 -0.866025 -0.5
+    endloop
+  endfacet
+  facet normal -0.463726 0.76728 -0.442989
+    outer loop
+      vertex -5.30288e-17 -0.866025 -0.5
+      vertex -1.49976e-32 -2.44929e-16 1
+      vertex 2.44929e-16 -2.99952e-32 1
+    endloop
+  endfacet
+  facet normal -0.654654 0.654654 -0.377964
+    outer loop
+      vertex -5.30288e-17 -0.866025 -0.5
+      vertex 2.44929e-16 -2.99952e-32 1
+      vertex 0.866025 -1.06058e-16 -0.5
+    endloop
+  endfacet
+  facet normal -0.76728 -0.463726 -0.442989
+    outer loop
+      vertex 0.866025 -1.06058e-16 -0.5
+      vertex 2.44929e-16 -2.99952e-32 1
+      vertex 4.49928e-32 2.44929e-16 1
+    endloop
+  endfacet
+  facet normal -0.654654 -0.654654 -0.377964
+    outer loop
+      vertex 0.866025 -1.06058e-16 -0.5
+      vertex 4.49928e-32 2.44929e-16 1
+      vertex 1.59086e-16 0.866025 -0.5
+    endloop
+  endfacet
+  facet normal 0.463726 -0.76728 -0.442989
+    outer loop
+      vertex 1.59086e-16 0.866025 -0.5
+      vertex 4.49928e-32 2.44929e-16 1
+      vertex -2.44929e-16 5.99904e-32 1
+    endloop
+  endfacet
+  facet normal 0.654654 -0.654654 -0.377964
+    outer loop
+      vertex 1.59086e-16 0.866025 -0.5
+      vertex -2.44929e-16 5.99904e-32 1
+      vertex -0.866025 2.12115e-16 -0.5
+    endloop
+  endfacet
+endsolid pyramid

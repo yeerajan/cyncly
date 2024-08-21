@@ -39,20 +39,20 @@ void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, cons
 }
 
 int main() {
-    // Parameters for the sphere
+    // Parameters for the conical cylinder
     double radius = 1.0;
-    int N = 40; // Number of latitude segments 
-    int M = 5; // Number of longitude segments
+    int N = 3; // Number of latitude segments 
+    int M = 100; // Number of longitude segments
 
     // Open the STL file
-    std::ofstream stlFile("sphere.stl");
+    std::ofstream stlFile("conical_cylinder.stl");
 
     if (!stlFile) {
         std::cerr << "Unable to open file";
         return 1;
     }
 
-    stlFile << "solid sphere\n";
+    stlFile << "solid conical cylinder\n";
 
     for (int i = 0; i < N; ++i) {
         double phi1 = PI * i / N;          
@@ -86,11 +86,11 @@ int main() {
         }
     }
 
-    stlFile << "endsolid sphere\n";
+    stlFile << "endsolid conical cylinder\n";
 
     stlFile.close();
 
-    std::cout << "sphere.stl file has been generated." << std::endl;
+    std::cout << "conical_cylinder.stl file has been generated." << std::endl;
 
     return 0;
 }
