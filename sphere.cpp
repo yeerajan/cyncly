@@ -42,8 +42,8 @@ void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, cons
 void writeSTL(){
 // Parameters for the sphere
     double radius = 1.0;
-    int N = 10; // Number of latitude segments 
-    int M = 20; // Number of longitude segments
+    int N = 100; // Number of latitude segments 
+    int M = 200; // Number of longitude segments
 
     // Open the STL file
     std::ofstream stlFile("sphere.stl");
