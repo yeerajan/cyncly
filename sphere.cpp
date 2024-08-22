@@ -38,19 +38,15 @@ void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, cons
     stlFile << "  endfacet\n";
 }
 
-int main() {
-    // Parameters for the sphere
+
+void writeSTL(){
+// Parameters for the sphere
     double radius = 1.0;
-    int N = 40; // Number of latitude segments 
-    int M = 5; // Number of longitude segments
+    int N = 10; // Number of latitude segments 
+    int M = 20; // Number of longitude segments
 
     // Open the STL file
     std::ofstream stlFile("sphere.stl");
-
-    if (!stlFile) {
-        std::cerr << "Unable to open file";
-        return 1;
-    }
 
     stlFile << "solid sphere\n";
 
@@ -81,16 +77,26 @@ int main() {
                           radius * std::cos(phi1) };
 
             // Write the two triangles
-            writeFacet(stlFile, v1, v2, v3);
-            writeFacet(stlFile, v1, v3, v4);
+            if(phi1==0){
+                writeFacet(stlFile, v1, v2, v3);
+            } else if(phi2==PI){
+                writeFacet(stlFile, v1, v3, v4);
+            }
+            else {
+                writeFacet(stlFile, v1, v2, v3);
+                writeFacet(stlFile, v1, v3, v4);
+            }
+            
         }
     }
 
     stlFile << "endsolid sphere\n";
 
     stlFile.close();
-
+}
+int main() {
+    
+    writeSTL();
     std::cout << "sphere.stl file has been generated." << std::endl;
-
     return 0;
 }
