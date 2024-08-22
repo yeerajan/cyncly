@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cmath>
 
-const int boxLength=1;
+const int boxLength=5;
 
 struct Vertex {
     double x, y, z;
