@@ -61,7 +61,6 @@ void writeSTL(int Triangle[][3], Vertex Node[8] ) {
 }
 
 
-
 int main() {
 
     Vertex Node[8]={

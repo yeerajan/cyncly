@@ -95,6 +95,7 @@ void writeSTL()
     std::cout << "pyramid.stl file has been generated." << std::endl;
 }
 
+
 int main()
 {
     writeSTL();

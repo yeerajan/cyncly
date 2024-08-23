@@ -121,7 +121,7 @@ void writeSTL()
         }
     }
     writeCircleTop(stlFile, height);
-    stlFile << "endsolid sphere\n";
+    stlFile << "endsolid cylinder\n";
 
     stlFile.close();
 

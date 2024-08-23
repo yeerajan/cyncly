@@ -93,10 +93,10 @@ void writeSTL(){
     stlFile << "endsolid sphere\n";
 
     stlFile.close();
+    std::cout << "sphere.stl file has been generated." << std::endl;
 }
 int main() {
     
     writeSTL();
-    std::cout << "sphere.stl file has been generated." << std::endl;
     return 0;
 }
