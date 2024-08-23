@@ -28,9 +28,7 @@ Vertex findNormal(const Vertex &v1, const Vertex &v2, const Vertex &v3)
     return normal;
 }
 
-void writeFacet(std::ofstream &stlFile, const Vertex &v1, const Vertex &v2, const Vertex &v3)
-{
-
+void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, const Vertex& v3){
     Vertex normal = findNormal(v1, v2, v3);
 
     // Write the facet to the STL file
@@ -42,25 +40,56 @@ void writeFacet(std::ofstream &stlFile, const Vertex &v1, const Vertex &v2, cons
     stlFile << "    endloop\n";
     stlFile << "  endfacet\n";
 }
-
-int main()
+ void writeCircleTop(std::ofstream& stlFile, double zed){
+    int N = 100;
+    for (int i = 0; i < N; ++i)
+    {
+        double theta1 = (2 * PI * i) / N;
+        double theta2 = (2 * PI * (i + 1)) / N;
+        Vertex v1 = {0, 0, zed};
+        Vertex v2 = {radius * cos(theta1), radius * sin(theta1), zed};
+        Vertex v3 = {radius * cos(theta2), radius * sin(theta2), zed};
+        // Write the facet to the STL file
+        Vertex normal= {0,0,1};
+        stlFile << "  facet normal " << normal.x << " " << normal.y << " " << normal.z << "\n";
+        stlFile << "    outer loop\n";
+        stlFile << "      vertex " << v1.x << " " << v1.y << " " << v1.z << "\n";
+        stlFile << "      vertex " << v2.x << " " << v2.y << " " << v2.z << "\n";
+        stlFile << "      vertex " << v3.x << " " << v3.y << " " << v3.z << "\n";
+        stlFile << "    endloop\n";
+        stlFile << "  endfacet\n";
+    }
+ }
+ void writeCircleDown(std::ofstream& stlFile, double zed){
+    int N = 100;
+    for (int i = 0; i < N; ++i)
+    {
+        double theta1 = (2 * PI * i) / N;
+        double theta2 = (2 * PI * (i + 1)) / N;
+        Vertex v1 = {0, 0, zed};
+        Vertex v2 = {radius * cos(theta1), radius * sin(theta1), zed};
+        Vertex v3 = {radius * cos(theta2), radius * sin(theta2), zed};
+        // Write the facet to the STL file
+        Vertex normal= {0,0,-1};
+        stlFile << "  facet normal " << normal.x << " " << normal.y << " " << normal.z << "\n";
+        stlFile << "    outer loop\n";
+        stlFile << "      vertex " << v3.x << " " << v3.y << " " << v3.z << "\n";
+        stlFile << "      vertex " << v2.x << " " << v2.y << " " << v2.z << "\n";
+        stlFile << "      vertex " << v1.x << " " << v1.y << " " << v1.z << "\n";
+        stlFile << "    endloop\n";
+        stlFile << "  endfacet\n";
+    }
+ }
+void writeSTL()
 {
-    // Parameters for the sphere
-    double radius = 1.0;
-    int N = 25; // Number of latitude segments
-    int M = 25; // Number of longitude segments
+    int N = 100; // Number of latitude segments
+    int M = 1; // Number of longitude segments
 
     // Open the STL file
     std::ofstream stlFile("cylinder.stl");
 
-    if (!stlFile)
-    {
-        std::cerr << "Unable to open file";
-        return 1;
-    }
-
     stlFile << "solid cylinder\n";
-
+    writeCircleDown(stlFile, 0);
     for (int i = 0; i < N; ++i)
     {
         double theta1 = 2 * PI * i / N;
@@ -87,17 +116,21 @@ int main()
             Vertex v4 = {radius * std::cos(theta1),
                          radius * std::sin(theta1),
                          height2};
-
-            // Write the two triangles
-            writeFacet(stlFile, v1, v2, v3);
-            writeFacet(stlFile, v1, v3, v4);
+            writeFacet(stlFile,v1,v2,v3);
+            writeFacet(stlFile,v1,v3,v4);
         }
     }
+    writeCircleTop(stlFile, height);
     stlFile << "endsolid sphere\n";
 
     stlFile.close();
 
     std::cout << "cylinder.stl file has been generated." << std::endl;
 
+}
+
+int main()
+{
+    writeSTL();
     return 0;
 }

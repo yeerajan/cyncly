@@ -3,3 +3,5 @@ Next: To create cone, rectangle, triangle, circle, cylinder by taking input from
 
 To generate cylinder.
 fix sphere
+
+to write data of .stl file in csv file and then write .stl file
