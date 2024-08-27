@@ -1,14 +1,19 @@
+// This file is creating a csv file. Reading that csv file creating an stl file to generate a cube.
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <vector>
+#include <sstream> // Required for std::stringstream
+using namespace std;
 
-const int boxLength=5;
-
-struct Vertex {
+struct Vertex
+{
     double x, y, z;
 };
 
-Vertex findNormal(const Vertex& v1, const Vertex& v2, const Vertex& v3){
+Vertex findNormal(const Vertex &v1, const Vertex &v2, const Vertex &v3)
+{
     // Calculate normal
     double normalX = (v2.y - v1.y) * (v3.z - v1.z) - (v2.z - v1.z) * (v3.y - v1.y);
     double normalY = (v2.z - v1.z) * (v3.x - v1.x) - (v2.x - v1.x) * (v3.z - v1.z);
@@ -24,17 +29,70 @@ Vertex findNormal(const Vertex& v1, const Vertex& v2, const Vertex& v3){
     return normal;
 }
 
-void writeSTL(int Triangle[][3], Vertex Node[8] ) {
-    
-    std::ofstream stlFile("cube.stl");
+void writeCSV(const vector<vector<double>> &Node, const vector<vector<int>> &Triangle)
+{
+    std::ofstream writeFile("write_cube.csv"); // creating file... write_cube.csv
+    // writeFile << "x" << "," << "y" << "," <<"z";
+    for (size_t i = 0; i < Node.size(); ++i)
+    {
+        writeFile << Node[i][0];
+        writeFile << ",";
+        writeFile << Node[i][1];
+        writeFile << ",";
+        writeFile << Node[i][2];
+        writeFile << "\n"; // Newline at the end of each row
+    }
+    // writeFile << "pos1" << "," << "pos2" << "," << "pos3\n";
+    for (size_t i = 0; i < Triangle.size(); ++i)
+    {
+        writeFile << Triangle[i][0];
+        writeFile << ",";
+        writeFile << Triangle[i][1];
+        writeFile << ",";
+        writeFile << Triangle[i][2];
+        writeFile << "\n"; // Newline at the end of each row
+    }
+    writeFile.close();
+}
+
+void writeSTL(vector<vector<int>> Triangle)
+{
+    ifstream inputFile("write_cube.csv"); // input stream, reading now
+    vector<vector<double>> Node;          // container
+
+    if (inputFile.is_open())
+    {
+        std::string line;
+        for (int i = 1; i <= 8; ++i)
+        {
+            std::getline(inputFile, line);
+            vector<double> temp;
+            std::stringstream ss(line);
+            std::string cell;
+
+            while (std::getline(ss, cell, ','))
+            {
+                temp.push_back(stod(cell));
+            }
+            Node.push_back(temp);
+        }
+        inputFile.close();
+    }
+    else
+    {
+        std::cerr << "Error opening file: " << "write_cube.csv" << endl;
+    }
+
+    ofstream stlFile("cube.stl"); // out stream, writing .stl file now
 
     stlFile << "solid cube\n";
 
-    for(int i=0; i<12; ++i){
-        int pos1=Triangle[i][0],pos2=Triangle[i][1],pos3=Triangle[i][2];
-        Vertex v1=Node[pos1];
-        Vertex v2=Node[pos2];
-        Vertex v3=Node[pos3];
+    for (int i = 0; i < 12; ++i)
+    {
+        int pos1 = Triangle[i][0], pos2 = Triangle[i][1], pos3 = Triangle[i][2];
+        Vertex v1 = {Node[pos1][0], Node[pos1][1], Node[pos1][2]};
+        Vertex v2 = {Node[pos2][0], Node[pos2][1], Node[pos2][2]};
+        Vertex v3 = {Node[pos3][0], Node[pos3][1], Node[pos3][2]};
 
         Vertex normal = findNormal(v1, v2, v3);
 
@@ -43,9 +101,9 @@ void writeSTL(int Triangle[][3], Vertex Node[8] ) {
         stlFile << "    outer loop\n";
 
         stlFile << "      vertex " << v3.x << " " << v3.y << " " << v3.z << "\n";
-        
+
         stlFile << "      vertex " << v2.x << " " << v2.y << " " << v2.z << "\n";
-        
+
         stlFile << "      vertex " << v1.x << " " << v1.y << " " << v1.z << "\n";
 
         stlFile << "    endloop\n";
@@ -57,38 +115,37 @@ void writeSTL(int Triangle[][3], Vertex Node[8] ) {
     stlFile.close();
 
     std::cout << "cube.stl file has been generated." << std::endl;
-
 }
 
+int main()
+{
+    double boxLength = 1;
+    cout << "Enter the cube length: \n";
+    cin >> boxLength;
+    vector<vector<double>> Node = {
+        {0, 0, 0},
+        {0, boxLength, 0},
+        {boxLength, boxLength, 0},
+        {boxLength, 0, 0},
+        {boxLength, 0, boxLength},
+        {boxLength, boxLength, boxLength},
+        {0, boxLength, boxLength},
+        {0, 0, boxLength}};
 
-int main() {
-
-    Vertex Node[8]={
-        {0,0,0},
-        {0,boxLength,0},
-        {boxLength,boxLength,0},
-        {boxLength,0,0},
-        {boxLength,0,boxLength},
-        {boxLength,boxLength,boxLength},
-        {0,boxLength,boxLength},
-        {0,0,boxLength}
-    };
-
-    int Triangle[12][3]={
-        {0,2,1},
-        {0,3,2},
-        {3,5,2},
-        {3,4,5},
-        {1,2,5},
-        {1,5,6},
-        {0,7,4},
-        {0,4,3},
-        {7,6,5},
-        {7,5,4},
-        {0,1,6},
-        {0,6,7}
-    };
-
-    writeSTL(Triangle, Node);
+    vector<vector<int>> Triangle = {
+        {0, 2, 1},
+        {0, 3, 2},
+        {3, 5, 2},
+        {3, 4, 5},
+        {1, 2, 5},
+        {1, 5, 6},
+        {0, 7, 4},
+        {0, 4, 3},
+        {7, 6, 5},
+        {7, 5, 4},
+        {0, 1, 6},
+        {0, 6, 7}};
+    writeCSV(Node, Triangle);
+    writeSTL(Triangle); // write .stl file by reading the write_cube.csv file
     return 0;
 }
