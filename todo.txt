@@ -5,3 +5,8 @@ To generate cylinder.
 fix sphere
 
 to write data of .stl file in csv file and then write .stl file
+
+develop_cube.cpp : 
+I have to create csv file and write and read to create cube.
+for cube, only reading. 
+

@@ -5,6 +5,7 @@
 #include <cmath>
 #include <vector>
 
+
 struct Point {
     double x, y, z;
 };
@@ -48,7 +49,7 @@ void processCSV(const std::string& inputFilename, const std::string& outputFilen
     }
     
     std::string line;
-    std::getline(inputFile, line);
+    std::getline(inputFile, line);   // input file se line me copy ho gaya
     outputFile << line << ",perpendicular_distance" << std::endl;  
 
     while (std::getline(inputFile, line)) {
@@ -77,8 +78,8 @@ void processCSV(const std::string& inputFilename, const std::string& outputFilen
 }
 
 int main() {
-    std::string inputFilename = "points.csv";
-    std::string outputFilename = "points_with_distances.csv";
+    std::string inputFilename = "points.csv";                     
+    std::string outputFilename = "points_with_distances.csv";     
     processCSV(inputFilename, outputFilename);
     
     std::cout << "Perpendicular distances added to " << outputFilename << std::endl;

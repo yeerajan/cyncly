@@ -13,12 +13,9 @@ using namespace std;
 string cleanWord(const string &word)
 {
     string cleaned;
-    for (char ch : word)
-    {
+    for (char ch : word){
         if (isalpha(ch))
-        {
-            cleaned += tolower(ch);
-        }
+        cleaned += tolower(ch);
     }
     return cleaned;
 }
@@ -27,7 +24,7 @@ void inputFunction(map<string, int> &wordCount)
     std::ifstream inputFile("story.txt");
     if (!inputFile.is_open())
     {
-        std::cerr << "Could not open the input file." << std::endl;
+        std::cerr << "Could not open the input file." << endl;
         return;
     }
 
@@ -39,9 +36,7 @@ void inputFunction(map<string, int> &wordCount)
         {
             string cleanedWord = cleanWord(word);
             if (!cleanedWord.empty())
-            {
-                wordCount[cleanedWord]++;
-            }
+            wordCount[cleanedWord]++;
         }
     }
 
@@ -53,17 +48,15 @@ void outputFunction(map<string, int> &wordCount)
     std::ofstream outputFile("word_count.csv");
 
     outputFile << "Word,Count\n";
+
     for (const auto &pair : wordCount)
-    {
-        outputFile << pair.first << "," << pair.second << "\n";
-    }
+    outputFile << pair.first << "," << pair.second << "\n";
 
     outputFile.close();
 }
 
 int main()
 {
-
     map<string, int> wordCount;
 
     inputFunction(wordCount);
