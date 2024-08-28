@@ -2799,4 +2799,4 @@ solid cylinder
       vertex 1 -2.44929e-16 5
     endloop
   endfacet
-endsolid sphere
+endsolid cylinder
