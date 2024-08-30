@@ -2,6 +2,8 @@
 #include <fstream>
 #include <cmath>
 
+using namespace std;
+
 const double PI = 3.141592653589793;
 const double height = 5.00;
 const double radius = 1.00;
@@ -125,7 +127,7 @@ void writeSTL()
 
     stlFile.close();
 
-    std::cout << "cylinder.stl file has been generated." << std::endl;
+    cout << "cylinder.stl file has been generated." << endl;
 
 }
 

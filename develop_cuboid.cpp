@@ -35,22 +35,12 @@ void writeCSV(const vector<vector<double>> &Node, const vector<vector<int>> &Tri
     // writeFile << "x" << "," << "y" << "," <<"z";
     for (size_t i = 0; i < Node.size(); ++i)
     {
-        writeFile << Node[i][0];
-        writeFile << ",";
-        writeFile << Node[i][1];
-        writeFile << ",";
-        writeFile << Node[i][2];
-        writeFile << "\n"; // Newline at the end of each row
+        writeFile << Node[i][0] << "," << Node[i][1] << "," << Node[i][2] << "\n";
     }
     // writeFile << "pos1" << "," << "pos2" << "," << "pos3\n";
     for (size_t i = 0; i < Triangle.size(); ++i)
     {
-        writeFile << Triangle[i][0];
-        writeFile << ",";
-        writeFile << Triangle[i][1];
-        writeFile << ",";
-        writeFile << Triangle[i][2];
-        writeFile << "\n"; // Newline at the end of each row
+        writeFile << Triangle[i][0] << "," << Triangle[i][1] << "," << Triangle[i][2] << "\n";
     }
     writeFile.close();
 }
@@ -58,19 +48,19 @@ void writeCSV(const vector<vector<double>> &Node, const vector<vector<int>> &Tri
 void writeSTL(vector<vector<int>> Triangle)
 {
     ifstream inputFile("write_cuboid.csv"); // input stream, reading now
-    vector<vector<double>> Node;          // container
+    vector<vector<double>> Node;            // container
 
     if (inputFile.is_open())
     {
         std::string line;
-        for (int i = 1; i <= 8; ++i)
+        for (int i = 0; i < 8; ++i)
         {
-            std::getline(inputFile, line);
+            getline(inputFile, line);
             vector<double> temp;
             std::stringstream ss(line);
-            std::string cell;
+            string cell;
 
-            while (std::getline(ss, cell, ','))
+            while (getline(ss, cell, ','))
             {
                 temp.push_back(stod(cell));
             }
@@ -119,7 +109,7 @@ void writeSTL(vector<vector<int>> Triangle)
 
 int main()
 {
-    double length = 1, width=1, height=1;
+    double length = 1, width = 1, height = 1;
     cout << "Enter the cuboid length, width and height: \n";
     cin >> length >> width >> height;
     vector<vector<double>> Node = {

@@ -42,8 +42,8 @@ void writeFacet(std::ofstream& stlFile, const Vertex& v1, const Vertex& v2, cons
 void writeSTL(){
 // Parameters for the sphere
     double radius = 1.0;
-    int N = 100; // Number of latitude segments 
-    int M = 200; // Number of longitude segments
+    int N = 25; // Number of latitude segments 
+    int M = 50; // Number of longitude segments
 
     // Open the STL file
     std::ofstream stlFile("sphere.stl");
@@ -51,35 +51,35 @@ void writeSTL(){
     stlFile << "solid sphere\n";
 
     for (int i = 0; i < N; ++i) {
-        double phi1 = PI * i / N;          
-        double phi2 = PI * (i + 1) / N;    
+        double theta1 = PI * i / N;          
+        double theta2 = PI * (i + 1) / N;    
 
         for (int j = 0; j < M; ++j) {
-            double theta1 = 2 * PI * j / M;
-            double theta2 = 2 * PI * (j + 1) / M;
+            double phi1 = 2 * PI * j / M;
+            double phi2 = 2 * PI * (j + 1) / M;
 
             // Calculate the vertices of the first triangle
-            Vertex v1 = { radius * std::sin(phi1) * std::cos(theta1),
-                          radius * std::sin(phi1) * std::sin(theta1),
-                          radius * std::cos(phi1) };
+            Vertex v1 = { radius * std::sin(theta1) * std::cos(phi1),
+                          radius * std::sin(theta1) * std::sin(phi1),
+                          radius * std::cos(theta1) };
 
-            Vertex v2 = { radius * std::sin(phi2) * std::cos(theta1),
-                          radius * std::sin(phi2) * std::sin(theta1),
-                          radius * std::cos(phi2) };
+            Vertex v2 = { radius * std::sin(theta2) * std::cos(phi1),
+                          radius * std::sin(theta2) * std::sin(phi1),
+                          radius * std::cos(theta2) };
 
-            Vertex v3 = { radius * std::sin(phi2) * std::cos(theta2),
-                          radius * std::sin(phi2) * std::sin(theta2),
-                          radius * std::cos(phi2) };
+            Vertex v3 = { radius * std::sin(theta2) * std::cos(phi2),
+                          radius * std::sin(theta2) * std::sin(phi2),
+                          radius * std::cos(theta2) };
 
             // Calculate the vertices of the second triangle
-            Vertex v4 = { radius * std::sin(phi1) * std::cos(theta2),
-                          radius * std::sin(phi1) * std::sin(theta2),
-                          radius * std::cos(phi1) };
+            Vertex v4 = { radius * std::sin(theta1) * std::cos(phi2),
+                          radius * std::sin(theta1) * std::sin(phi2),
+                          radius * std::cos(theta1) };
 
             // Write the two triangles
-            if(phi1==0){
+            if(theta1==0){
                 writeFacet(stlFile, v1, v2, v3);
-            } else if(phi2==PI){
+            } else if(theta2==PI){
                 writeFacet(stlFile, v1, v3, v4);
             }
             else {
